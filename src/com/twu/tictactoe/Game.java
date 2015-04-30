@@ -17,9 +17,13 @@ public class Game {
     public void start() {
         board.printBoard();
         String userInput = gameHelper.askForUserInput(currentPlayer);
-        board.redraw(currentPlayer, userInput);
+        if (board.isAValidPosition(userInput)) {
+            board.redraw(currentPlayer, userInput);
+        }
         currentPlayer = currentPlayer.equals("1") ? "2" : "1";
         userInput = gameHelper.askForUserInput(currentPlayer);
-        board.redraw(currentPlayer, userInput);
+        if (board.isAValidPosition(userInput)) {
+            board.redraw(currentPlayer, userInput);
+        }
     }
 }

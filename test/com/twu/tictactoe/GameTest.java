@@ -4,9 +4,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by kprakobk on 4/30/15.
@@ -61,5 +59,19 @@ public class GameTest {
         game.start();
 
         verify(gameHelper).askForUserInput("2");
+    }
+
+    @Test
+    public void shouldPromptCurrentUserToRenterWhenPositionIsTaken() {
+        String firstPlayer = "1";
+        String secondPlayer ="2";
+
+        when(gameHelper.askForUserInput(firstPlayer)).thenReturn("1");
+        when(gameHelper.askForUserInput(secondPlayer)).thenReturn("1");
+        when(board.isAValidPosition("1")).thenReturn(false);
+
+        game.start();
+
+        verify(board, never()).redraw(secondPlayer, "1");
     }
 }

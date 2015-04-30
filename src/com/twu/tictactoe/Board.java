@@ -36,6 +36,10 @@ public class Board {
         printBoard();
     }
 
+    public boolean isAValidPosition(String position) {
+        return false;
+    };
+
     private void updatePlayerPosition(String currentUser, String positionOnBoard) {
         String mark = currentUser.equals("1") ? " X " : " O ";
         playerPositions[Integer.parseInt(positionOnBoard) - 1] = mark;
