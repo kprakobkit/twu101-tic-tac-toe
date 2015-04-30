@@ -1,7 +1,6 @@
 package com.twu.tictactoe;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.PrintStream;
@@ -41,11 +40,7 @@ public class GameTest {
 
     @Test
     public void shouldRedrawBoardAfterReceivingPositionFromUser() {
-        when(board.isFull()).thenReturn(false).thenReturn(false).thenReturn(true);
-        when(board.isAValidPosition("1")).thenReturn(true);
-        when(board.isAValidPosition("2")).thenReturn(true);
-        when(gameHelper.askForUserInput("1")).thenReturn("1");
-        when(gameHelper.askForUserInput("2")).thenReturn("2");
+        playGameOneTimeThrough();
 
         game.start();
 
@@ -53,22 +48,43 @@ public class GameTest {
         verify(board, times(1)).redraw("2", "2");
     }
 
-
     @Test
     public void shouldPromptUserToReenterPositionUntilValid() {
-        when(board.isFull()).thenReturn(false).thenReturn(true);
-        when(board.isAValidPosition("1")).thenReturn(false);
-        when(board.isAValidPosition("2")).thenReturn(true);
-        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
-        when(gameHelper.askForUserInput("2")).thenReturn("3");
+        playGameOneTimeThroughWithOneInvalidPosition();
 
         game.start();
 
         verify(printStream, times(1)).println("The position is taken. Please enter another position.");
     }
 
+
+
     @Test
     public void shouldLetPlayersFillUntilBoardIsFull() {
+        playGameUntilBoardIsFull();
+
+        game.start();
+
+        verify(printStream).println("Game is a draw");
+    }
+
+    private void playGameOneTimeThrough() {
+        when(board.isFull()).thenReturn(false).thenReturn(false).thenReturn(true);
+        when(board.isAValidPosition("1")).thenReturn(true);
+        when(board.isAValidPosition("2")).thenReturn(true);
+        when(gameHelper.askForUserInput("1")).thenReturn("1");
+        when(gameHelper.askForUserInput("2")).thenReturn("2");
+    }
+
+    private void playGameOneTimeThroughWithOneInvalidPosition() {
+        when(board.isFull()).thenReturn(false).thenReturn(true);
+        when(board.isAValidPosition("1")).thenReturn(false);
+        when(board.isAValidPosition("2")).thenReturn(true);
+        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
+        when(gameHelper.askForUserInput("2")).thenReturn("3");
+    }
+
+    private void playGameUntilBoardIsFull() {
         when(board.isFull()).thenReturn(false).thenReturn(true);
         when(board.isAValidPosition("1")).thenReturn(true);
         when(board.isAValidPosition("2")).thenReturn(true);
@@ -76,9 +92,5 @@ public class GameTest {
         when(board.isAValidPosition("4")).thenReturn(true);
         when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
         when(gameHelper.askForUserInput("2")).thenReturn("3").thenReturn("4");
-
-        game.start();
-
-        verify(printStream).println("Game is a draw");
     }
 }
