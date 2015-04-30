@@ -54,7 +54,7 @@ public class GameTest {
     }
 
     @Test
-    public void shouldLetPlayersFillBooardUntilFull() {
+    public void shouldLetPlayersFillBoardUntilFull() {
         playGameUntilBoardIsFull();
 
         game.start();
