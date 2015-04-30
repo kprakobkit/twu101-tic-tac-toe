@@ -3,8 +3,6 @@ package com.twu.tictactoe;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.PrintStream;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -42,11 +40,12 @@ public class GameTest {
     @Test
     public void shouldRedrawBoardAfterReceivingUserInput() {
         String userInput = "1";
+        String currentPlayer = "1";
 
-        when(gameHelper.askForUserInput("1")).thenReturn(userInput);
+        when(gameHelper.askForUserInput(currentPlayer)).thenReturn(userInput);
 
         game.start();
 
-        verify(board).redraw(userInput);
+        verify(board).redraw(currentPlayer, userInput);
     }
 }

@@ -16,6 +16,6 @@ public class Game {
     public void start() {
         board.printBoard();
         String userInput = gameHelper.askForUserInput(currentPlayer);
-        board.redraw(userInput);
+        board.redraw(currentPlayer, userInput);
     }
 }
