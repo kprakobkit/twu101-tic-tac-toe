@@ -28,10 +28,6 @@ public class GameTest {
     @Test
     public void shouldDisplayBoardWhenStarting() {
         when(board.isFull()).thenReturn(true);
-        when(board.isAValidPosition("1")).thenReturn(true);
-        when(board.isAValidPosition("2")).thenReturn(true);
-        when(gameHelper.askForUserInput("1")).thenReturn("1");
-        when(gameHelper.askForUserInput("2")).thenReturn("2");
 
         game.start();
 
@@ -61,7 +57,7 @@ public class GameTest {
 
     @Test
     public void shouldLetPlayersFillUntilBoardIsFull() {
-        playGameUntilBoardIsFull();
+        when(board.isFull()).thenReturn(true);
 
         game.start();
 
@@ -82,15 +78,5 @@ public class GameTest {
         when(board.isAValidPosition("2")).thenReturn(true);
         when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
         when(gameHelper.askForUserInput("2")).thenReturn("3");
-    }
-
-    private void playGameUntilBoardIsFull() {
-        when(board.isFull()).thenReturn(false).thenReturn(true);
-        when(board.isAValidPosition("1")).thenReturn(true);
-        when(board.isAValidPosition("2")).thenReturn(true);
-        when(board.isAValidPosition("3")).thenReturn(true);
-        when(board.isAValidPosition("4")).thenReturn(true);
-        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
-        when(gameHelper.askForUserInput("2")).thenReturn("3").thenReturn("4");
     }
 }
