@@ -36,7 +36,7 @@ public class GameTest {
 
         game.start();
 
-        verify(board).printBoard();
+        verify(board, atLeast(1)).printBoard();
     }
 
     @Test
@@ -49,8 +49,8 @@ public class GameTest {
 
         game.start();
 
-        verify(board).redraw("1", "1");
-        verify(board).redraw("2", "2");
+        verify(board, times(1)).redraw("1", "1");
+        verify(board, times(1)).redraw("2", "2");
     }
 
 
