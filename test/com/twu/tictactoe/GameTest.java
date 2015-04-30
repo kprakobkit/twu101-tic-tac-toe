@@ -28,6 +28,9 @@ public class GameTest {
 
     @Test
     public void shouldDisplayBoardWhenStarting() {
+        when(board.isAValidPosition("1")).thenReturn(true);
+        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("1");
+
         game.start();
 
         verify(board).printBoard();
@@ -35,6 +38,9 @@ public class GameTest {
 
     @Test
     public void shouldAskPlayerOneForInputWhenItIsPlayerOnesTurn() {
+        when(board.isAValidPosition("1")).thenReturn(true);
+        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("1");
+
         game.start();
 
         verify(gameHelper).askForUserInput("1");
@@ -59,6 +65,7 @@ public class GameTest {
         String currentPlayer = "1";
         String nextPlayer = "2";
 
+        when(board.isAValidPosition(playerOnePosition)).thenReturn(true);
         when(gameHelper.askForUserInput(currentPlayer)).thenReturn(playerOnePosition);
 
         game.start();
@@ -66,14 +73,14 @@ public class GameTest {
         verify(gameHelper).askForUserInput(nextPlayer);
     }
 
+
     @Test
-    public void shouldPromptCurrentUserToRenterWhenPositionIsTaken() {
-        when(board.isAValidPosition("1")).thenReturn(false);
+    public void shouldPromptUserToRenterPositionUntilValid() {
+        when(board.isAValidPosition("1")).thenReturn(false).thenReturn(false).thenReturn(true);
+        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("1");
 
         game.start();
 
-        verify(printStream).println("The position is taken. Please enter another position.");
+        verify(printStream, times(2)).println("The position is taken. Please enter another position.");
     }
-
-
 }

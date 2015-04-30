@@ -21,14 +21,14 @@ public class Game {
     public void start() {
         board.printBoard();
         String userInput = gameHelper.askForUserInput(currentPlayer);
-        if (board.isAValidPosition(userInput)) {
-            board.redraw(currentPlayer, userInput);
+
+        while(!board.isAValidPosition(userInput)) {
+            printStream.println("The position is taken. Please enter another position.");
+            userInput = gameHelper.askForUserInput(currentPlayer);
         }
-        printStream.println("The position is taken. Please enter another position.");
+        board.redraw(currentPlayer, userInput);
+
         currentPlayer = currentPlayer.equals("1") ? "2" : "1";
         userInput = gameHelper.askForUserInput(currentPlayer);
-        if (board.isAValidPosition(userInput)) {
-            board.redraw(currentPlayer, userInput);
-        }
     }
 }
