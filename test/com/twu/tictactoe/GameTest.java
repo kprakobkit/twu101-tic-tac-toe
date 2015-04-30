@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.PrintStream;
+
 import static org.mockito.Mockito.*;
 
 /**
@@ -14,12 +16,14 @@ public class GameTest {
     private Board board;
     private Game game;
     private GameHelper gameHelper;
+    private PrintStream printStream;
 
     @Before
     public void setUp() throws Exception {
         board = mock(Board.class);
         gameHelper = mock(GameHelper.class);
-        game = new Game(board, gameHelper);
+        printStream = mock(PrintStream.class);
+        game = new Game(board, gameHelper, printStream);
     }
 
     @Test
@@ -42,6 +46,7 @@ public class GameTest {
         String currentPlayer = "1";
 
         when(gameHelper.askForUserInput(currentPlayer)).thenReturn(position);
+        when(board.isAValidPosition(position)).thenReturn(true);
 
         game.start();
 
@@ -49,29 +54,26 @@ public class GameTest {
     }
 
     @Test
-    public void shouldBePlayersTwoTurnAfterPlayerOneEntersAPosition() {
-        String playerOneInput = "1";
+    public void shouldBePlayerTwosTurnAfterPlayerOneEntersAPosition() {
+        String playerOnePosition = "1";
         String currentPlayer = "1";
-        String playerTwoInput = "2";
+        String nextPlayer = "2";
 
-        when(gameHelper.askForUserInput(currentPlayer)).thenReturn(playerOneInput);
+        when(gameHelper.askForUserInput(currentPlayer)).thenReturn(playerOnePosition);
 
         game.start();
 
-        verify(gameHelper).askForUserInput("2");
+        verify(gameHelper).askForUserInput(nextPlayer);
     }
 
     @Test
     public void shouldPromptCurrentUserToRenterWhenPositionIsTaken() {
-        String firstPlayer = "1";
-        String secondPlayer ="2";
-
-        when(gameHelper.askForUserInput(firstPlayer)).thenReturn("1");
-        when(gameHelper.askForUserInput(secondPlayer)).thenReturn("1");
         when(board.isAValidPosition("1")).thenReturn(false);
 
         game.start();
 
-        verify(board, never()).redraw(secondPlayer, "1");
+        verify(printStream).println("The position is taken. Please enter another position.");
     }
+
+
 }
