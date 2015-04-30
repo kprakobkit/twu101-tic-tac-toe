@@ -7,6 +7,7 @@ public class Game {
     private Board board;
     private GameHelper gameHelper;
     private String currentPlayer = "1";
+    private Boolean over = false;
 
     public Game(Board board, GameHelper gameHelper) {
         this.board = board;
@@ -16,6 +17,9 @@ public class Game {
     public void start() {
         board.printBoard();
         String userInput = gameHelper.askForUserInput(currentPlayer);
+        board.redraw(currentPlayer, userInput);
+        currentPlayer = currentPlayer.equals("1") ? "2" : "1";
+        userInput = gameHelper.askForUserInput(currentPlayer);
         board.redraw(currentPlayer, userInput);
     }
 }

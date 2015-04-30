@@ -13,5 +13,4 @@ public class Main {
         Game game = new Game(board, gameHelper);
         game.start();
     }
-
 }

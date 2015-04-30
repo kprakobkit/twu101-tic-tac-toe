@@ -1,6 +1,7 @@
 package com.twu.tictactoe;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
@@ -31,21 +32,34 @@ public class GameTest {
     }
 
     @Test
-    public void shouldAskPlayerOneForInputWhenPlayerOnesTurn() {
+    public void shouldAskPlayerOneForInputWhenItIsPlayerOnesTurn() {
         game.start();
 
         verify(gameHelper).askForUserInput("1");
     }
 
     @Test
-    public void shouldRedrawBoardAfterReceivingUserInput() {
-        String userInput = "1";
+    public void shouldRedrawBoardAfterReceivingPositionFromUser() {
+        String position = "1";
         String currentPlayer = "1";
 
-        when(gameHelper.askForUserInput(currentPlayer)).thenReturn(userInput);
+        when(gameHelper.askForUserInput(currentPlayer)).thenReturn(position);
 
         game.start();
 
-        verify(board).redraw(currentPlayer, userInput);
+        verify(board).redraw(currentPlayer, position);
+    }
+
+    @Test
+    public void shouldBePlayersTwoTurnAfterPlayerOneEntersAPosition() {
+        String playerOneInput = "1";
+        String currentPlayer = "1";
+        String playerTwoInput = "2";
+
+        when(gameHelper.askForUserInput(currentPlayer)).thenReturn(playerOneInput);
+
+        game.start();
+
+        verify(gameHelper).askForUserInput("2");
     }
 }
