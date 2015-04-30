@@ -52,6 +52,14 @@ public class Board {
     }
 
     public boolean isFull() {
-        return false;
+        Boolean isFull = true;
+
+        for (int i = 0; i < playerPositions.length; i++) {
+            if(playerPositions[i].equals("   ")) {
+                isFull = false;
+            }
+        }
+
+        return isFull;
     }
 }

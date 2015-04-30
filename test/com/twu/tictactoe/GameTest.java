@@ -41,7 +41,7 @@ public class GameTest {
 
     @Test
     public void shouldRedrawBoardAfterReceivingPositionFromUser() {
-        when(board.isFull()).thenReturn(false).thenReturn(true);
+        when(board.isFull()).thenReturn(false).thenReturn(false).thenReturn(true);
         when(board.isAValidPosition("1")).thenReturn(true);
         when(board.isAValidPosition("2")).thenReturn(true);
         when(gameHelper.askForUserInput("1")).thenReturn("1");
@@ -53,21 +53,10 @@ public class GameTest {
         verify(board).redraw("2", "2");
     }
 
-    @Test
-    public void shouldBePlayerTwosTurnAfterPlayerOneEntersAPosition() {
-        when(board.isFull()).thenReturn(true);
-        when(board.isAValidPosition("1")).thenReturn(true);
-        when(gameHelper.askForUserInput("1")).thenReturn("1");
-
-        game.start();
-
-        verify(gameHelper, times(1)).askForUserInput("2");
-    }
-
 
     @Test
     public void shouldPromptUserToReenterPositionUntilValid() {
-        when(board.isFull()).thenReturn(true);
+        when(board.isFull()).thenReturn(false).thenReturn(true);
         when(board.isAValidPosition("1")).thenReturn(false);
         when(board.isAValidPosition("2")).thenReturn(true);
         when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
