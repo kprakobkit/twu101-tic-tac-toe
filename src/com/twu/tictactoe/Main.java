@@ -5,8 +5,9 @@ package com.twu.tictactoe;
  */
 public class Main {
     public static void main(String[] args) {
-        Board board = new Board();
+        Board board = new Board(System.out);
         Game game = new Game(board);
         game.start();
     }
+
 }
