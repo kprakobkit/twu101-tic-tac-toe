@@ -10,7 +10,6 @@ public class Game {
     private GameHelper gameHelper;
     private PrintStream printStream;
     private String currentPlayer = "1";
-    private Boolean over = false;
 
     public Game(Board board, GameHelper gameHelper, PrintStream printStream) {
         this.board = board;
