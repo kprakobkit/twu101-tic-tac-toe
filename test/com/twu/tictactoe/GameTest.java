@@ -36,7 +36,7 @@ public class GameTest {
 
     @Test
     public void shouldRedrawBoardAfterReceivingPositionFromUser() {
-        playGameOneTimeThrough();
+        playGameOneTimeThroughWithTwoUsers();
 
         game.start();
 
@@ -53,18 +53,16 @@ public class GameTest {
         verify(printStream, times(1)).println("The position is taken. Please enter another position.");
     }
 
-
-
     @Test
-    public void shouldLetPlayersFillUntilBoardIsFull() {
-        when(board.isFull()).thenReturn(true);
+    public void shouldLetPlayersFillBooardUntilFull() {
+        playGameUntilBoardIsFull();
 
         game.start();
 
         verify(printStream).println("Game is a draw");
     }
 
-    private void playGameOneTimeThrough() {
+    private void playGameOneTimeThroughWithTwoUsers() {
         when(board.isFull()).thenReturn(false).thenReturn(false).thenReturn(true);
         when(board.isAValidPosition("1")).thenReturn(true);
         when(board.isAValidPosition("2")).thenReturn(true);
@@ -78,5 +76,15 @@ public class GameTest {
         when(board.isAValidPosition("2")).thenReturn(true);
         when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
         when(gameHelper.askForUserInput("2")).thenReturn("3");
+    }
+
+    private void playGameUntilBoardIsFull() {
+        when(board.isFull()).thenReturn(false).thenReturn(false).thenReturn(true);
+        when(board.isAValidPosition("1")).thenReturn(true);
+        when(board.isAValidPosition("2")).thenReturn(true);
+        when(board.isAValidPosition("3")).thenReturn(true);
+        when(board.isAValidPosition("4")).thenReturn(true);
+        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
+        when(gameHelper.askForUserInput("2")).thenReturn("3").thenReturn("4");
     }
 }
