@@ -5,12 +5,17 @@ package com.twu.tictactoe;
  */
 public class Game {
     private Board board;
+    private GameHelper gameHelper;
+    private String currentPlayer = "1";
 
-    public Game(Board board) {
+    public Game(Board board, GameHelper gameHelper) {
         this.board = board;
+        this.gameHelper = gameHelper;
     }
 
     public void start() {
         board.printBoard();
+        String userInput = gameHelper.askForUserInput(currentPlayer);
+        board.redraw(userInput);
     }
 }
