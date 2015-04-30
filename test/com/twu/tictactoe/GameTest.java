@@ -28,8 +28,11 @@ public class GameTest {
 
     @Test
     public void shouldDisplayBoardWhenStarting() {
+        when(board.isFull()).thenReturn(true);
         when(board.isAValidPosition("1")).thenReturn(true);
-        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("1");
+        when(board.isAValidPosition("2")).thenReturn(true);
+        when(gameHelper.askForUserInput("1")).thenReturn("1");
+        when(gameHelper.askForUserInput("2")).thenReturn("2");
 
         game.start();
 
@@ -37,50 +40,56 @@ public class GameTest {
     }
 
     @Test
-    public void shouldAskPlayerOneForInputWhenItIsPlayerOnesTurn() {
-        when(board.isAValidPosition("1")).thenReturn(true);
-        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("1");
-
-        game.start();
-
-        verify(gameHelper).askForUserInput("1");
-    }
-
-    @Test
     public void shouldRedrawBoardAfterReceivingPositionFromUser() {
-        String position = "1";
-        String currentPlayer = "1";
-
-        when(gameHelper.askForUserInput(currentPlayer)).thenReturn(position);
-        when(board.isAValidPosition(position)).thenReturn(true);
+        when(board.isFull()).thenReturn(false).thenReturn(true);
+        when(board.isAValidPosition("1")).thenReturn(true);
+        when(board.isAValidPosition("2")).thenReturn(true);
+        when(gameHelper.askForUserInput("1")).thenReturn("1");
+        when(gameHelper.askForUserInput("2")).thenReturn("2");
 
         game.start();
 
-        verify(board).redraw(currentPlayer, position);
+        verify(board).redraw("1", "1");
+        verify(board).redraw("2", "2");
     }
 
     @Test
     public void shouldBePlayerTwosTurnAfterPlayerOneEntersAPosition() {
-        String playerOnePosition = "1";
-        String currentPlayer = "1";
-        String nextPlayer = "2";
-
-        when(board.isAValidPosition(playerOnePosition)).thenReturn(true);
-        when(gameHelper.askForUserInput(currentPlayer)).thenReturn(playerOnePosition);
+        when(board.isFull()).thenReturn(true);
+        when(board.isAValidPosition("1")).thenReturn(true);
+        when(gameHelper.askForUserInput("1")).thenReturn("1");
 
         game.start();
 
-        verify(gameHelper).askForUserInput(nextPlayer);
+        verify(gameHelper, times(1)).askForUserInput("2");
     }
 
 
     @Test
-    public void shouldPromptUserToRenterPositionUntilValid() {
-        when(board.isAValidPosition("1")).thenReturn(false).thenReturn(false).thenReturn(true);
-        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("1");
+    public void shouldPromptUserToReenterPositionUntilValid() {
+        when(board.isFull()).thenReturn(true);
+        when(board.isAValidPosition("1")).thenReturn(false);
+        when(board.isAValidPosition("2")).thenReturn(true);
+        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
+        when(gameHelper.askForUserInput("2")).thenReturn("3");
 
         game.start();
 
-        verify(printStream, times(2)).println("The position is taken. Please enter another position.");
+        verify(printStream, times(1)).println("The position is taken. Please enter another position.");
+    }
+
+    @Test
+    public void shouldLetPlayersFillUntilBoardIsFull() {
+        when(board.isFull()).thenReturn(false).thenReturn(true);
+        when(board.isAValidPosition("1")).thenReturn(true);
+        when(board.isAValidPosition("2")).thenReturn(true);
+        when(board.isAValidPosition("3")).thenReturn(true);
+        when(board.isAValidPosition("4")).thenReturn(true);
+        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
+        when(gameHelper.askForUserInput("2")).thenReturn("3").thenReturn("4");
+
+        game.start();
+
+        verify(printStream).println("Game is a draw");
     }
 }

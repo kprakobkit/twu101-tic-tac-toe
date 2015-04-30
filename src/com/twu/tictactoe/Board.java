@@ -37,11 +37,21 @@ public class Board {
     }
 
     public boolean isAValidPosition(String position) {
-        return false;
+        if(playerPositions[Integer.parseInt(position) - 1].equals(" X ")) {
+            return false;
+        }
+        if(playerPositions[Integer.parseInt(position) - 1].equals(" O ")) {
+            return false;
+        }
+        return true;
     };
 
     private void updatePlayerPosition(String currentUser, String positionOnBoard) {
         String mark = currentUser.equals("1") ? " X " : " O ";
         playerPositions[Integer.parseInt(positionOnBoard) - 1] = mark;
+    }
+
+    public boolean isFull() {
+        return false;
     }
 }

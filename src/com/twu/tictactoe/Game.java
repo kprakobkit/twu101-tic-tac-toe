@@ -22,13 +22,18 @@ public class Game {
         board.printBoard();
         String userInput = gameHelper.askForUserInput(currentPlayer);
 
-        while(!board.isAValidPosition(userInput)) {
-            printStream.println("The position is taken. Please enter another position.");
-            userInput = gameHelper.askForUserInput(currentPlayer);
-        }
-        board.redraw(currentPlayer, userInput);
+        do {
+            while(!board.isAValidPosition(userInput)) {
+                printStream.println("The position is taken. Please enter another position.");
+                userInput = gameHelper.askForUserInput(currentPlayer);
+            }
+            board.redraw(currentPlayer, userInput);
 
-        currentPlayer = currentPlayer.equals("1") ? "2" : "1";
-        userInput = gameHelper.askForUserInput(currentPlayer);
+            currentPlayer = currentPlayer.equals("1") ? "2" : "1";
+
+            userInput = gameHelper.askForUserInput(currentPlayer);
+        } while(!board.isFull());
+
+        printStream.println("Game is a draw");
     }
 }
