@@ -18,7 +18,7 @@ public class GameTest {
     private PrintStream printStream;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         board = mock(Board.class);
         gameHelper = mock(GameHelper.class);
         printStream = mock(PrintStream.class);
@@ -35,13 +35,13 @@ public class GameTest {
     }
 
     @Test
-    public void shouldUpdateBoardAfterReceivingPositionFromUser() {
+    public void shouldRedrawBoardAfterReceivingPositionFromUser() {
         playGameOneTimeThroughWithTwoUsers();
 
         game.start();
 
-        verify(board, times(1)).updatePlayerPosition("1", "1");
-        verify(board, times(1)).updatePlayerPosition("2", "2");
+        verify(board, times(1)).redraw("1", "1");
+        verify(board, times(1)).redraw("2", "2");
     }
 
     @Test
@@ -75,6 +75,7 @@ public class GameTest {
         when(board.isAValidPosition("1")).thenReturn(false);
         when(board.isAValidPosition("2")).thenReturn(true);
         when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
+        when(gameHelper.askForUserInput("2")).thenReturn("3");
     }
 
     private void playGameUntilBoardIsFull() {

@@ -31,11 +31,22 @@ public class Board {
         printStream.println(boardString);
     }
 
+    public void redraw(String currentUser, String positionOnBoard) {
+        updatePlayerPosition(currentUser, positionOnBoard);
+        printBoard();
+    }
+
     public boolean isAValidPosition(String position) {
-        return !(playerPositions[Integer.parseInt(position) - 1].equals("  "));
+        if(playerPositions[Integer.parseInt(position) - 1].equals(" X ")) {
+            return false;
+        }
+        if(playerPositions[Integer.parseInt(position) - 1].equals(" O ")) {
+            return false;
+        }
+        return true;
     };
 
-    public void updatePlayerPosition(String currentUser, String positionOnBoard) {
+    private void updatePlayerPosition(String currentUser, String positionOnBoard) {
         String mark = currentUser.equals("1") ? " X " : " O ";
         playerPositions[Integer.parseInt(positionOnBoard) - 1] = mark;
     }

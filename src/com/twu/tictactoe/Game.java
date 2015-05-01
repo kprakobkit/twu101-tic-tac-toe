@@ -20,12 +20,6 @@ public class Game {
     public void start() {
         board.printBoard();
 
-        play();
-
-        printStream.println("Game is a draw");
-    }
-
-    private void play() {
         while(!board.isFull()) {
             String userInput = gameHelper.askForUserInput(currentPlayer);
 
@@ -33,10 +27,12 @@ public class Game {
                 printStream.println("The position is taken. Please enter another position.");
                 userInput = gameHelper.askForUserInput(currentPlayer);
             }
-            board.updatePlayerPosition(currentPlayer, userInput);
-            board.printBoard();
+            board.redraw(currentPlayer, userInput);
+
             switchCurrentPlayer();
         }
+
+        printStream.println("Game is a draw");
     }
 
     private void switchCurrentPlayer() {
