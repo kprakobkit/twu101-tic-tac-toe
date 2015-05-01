@@ -35,7 +35,7 @@ public class GameTest {
     }
 
     @Test
-    public void shouldRedrawBoardAfterReceivingPositionFromUser() {
+    public void shouldUpdateBoardAfterReceivingPositionFromUser() {
         playGameOneTimeThroughWithTwoUsers();
 
         game.start();
