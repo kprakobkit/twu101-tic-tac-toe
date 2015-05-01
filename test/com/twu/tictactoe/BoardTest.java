@@ -44,7 +44,8 @@ public class BoardTest {
                                 "-----------\n" +
                                 "   |   |   ";
 
-        board.redraw("1", "2");
+        board.updatePlayerPosition("1", "2");
+        board.printBoard();
 
         verify(printStream).println(newBoardString);
     }

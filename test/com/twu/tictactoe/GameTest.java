@@ -40,8 +40,8 @@ public class GameTest {
 
         game.start();
 
-        verify(board, times(1)).redraw("1", "1");
-        verify(board, times(1)).redraw("2", "2");
+        verify(board, times(1)).updatePlayerPosition("1", "1");
+        verify(board, times(1)).updatePlayerPosition("2", "2");
     }
 
     @Test
