@@ -8,7 +8,7 @@ import java.io.PrintStream;
 public class Main {
     public static void main(String[] args) {
         PrintStream out = System.out;
-        PlayerPosition playerPosition = new PlayerPosition();
+        String[] playerPosition = new String[9];
         Board board = new Board(playerPosition);
         GameHelper gameHelper = new GameHelper(out);
         View view = new View(out, board);

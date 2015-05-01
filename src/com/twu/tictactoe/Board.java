@@ -1,17 +1,17 @@
 package com.twu.tictactoe;
 
 import java.io.PrintStream;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
  * Created by kprakobk on 4/30/15.
  */
 public class Board {
-    private String[] playerPositions = new String[9];
+    private String[] playerPositions;
 
-    private String boardString;
-
-    public Board(PlayerPosition playerPosition) {
+    public Board(String[] playerPosition) {
+        this.playerPositions = playerPosition;
         initializePlayerPositions();
     }
 

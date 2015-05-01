@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 /**
  * Created by kprakobk on 4/30/15.
@@ -16,41 +16,40 @@ public class ViewTest {
     private PrintStream printStream;
     private Board board;
     private View view;
-    private PlayerPosition playerPosition;
+    private String[] playerPosition;
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
-        playerPosition = new PlayerPosition();
+        playerPosition = new String[9];
         board = new Board(playerPosition);
         view = new View(printStream, board);
     }
 
     @Test
-    public void shouldPrintAValidBoard() {
+    public void shouldPrintAValidBoardWhenStarting() {
         String boardString = "   |   |   \n" +
                              "-----------\n" +
                              "   |   |   \n" +
                              "-----------\n" +
                              "   |   |   ";
 
-        view.printBoard();
-
-        verify(printStream).println(boardString);
+        assertEquals(board.toString(), boardString);
     }
 
     @Test
-    public void shouldRedrawBoardWithCorrectPositionAndSymbolForCorrectUserWhenReceiveUserInput() {
-        String newBoardString = "   | X |   \n" +
+    public void shouldPrintBoardWithCorrectPositionAndSymbolForCorrectUserWhenReceiveUserInput() {
+        String boardString = " O | X |   \n" +
                                 "-----------\n" +
                                 "   |   |   \n" +
                                 "-----------\n" +
                                 "   |   |   ";
 
         board.updatePlayerPosition("1", "2");
+        board.updatePlayerPosition("2", "1");
 
         view.printBoard();
 
-        verify(printStream).println(newBoardString);
+        assertEquals(board.toString(), boardString);
     }
 }
