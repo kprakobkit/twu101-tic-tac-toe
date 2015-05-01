@@ -18,7 +18,7 @@ public class GameTest {
     private PrintStream printStream;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         board = mock(Board.class);
         gameHelper = mock(GameHelper.class);
         printStream = mock(PrintStream.class);
@@ -75,7 +75,6 @@ public class GameTest {
         when(board.isAValidPosition("1")).thenReturn(false);
         when(board.isAValidPosition("2")).thenReturn(true);
         when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
-        when(gameHelper.askForUserInput("2")).thenReturn("3");
     }
 
     private void playGameUntilBoardIsFull() {

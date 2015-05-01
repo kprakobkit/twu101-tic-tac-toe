@@ -37,13 +37,7 @@ public class Board {
     }
 
     public boolean isAValidPosition(String position) {
-        if(playerPositions[Integer.parseInt(position) - 1].equals(" X ")) {
-            return false;
-        }
-        if(playerPositions[Integer.parseInt(position) - 1].equals(" O ")) {
-            return false;
-        }
-        return true;
+        return !(playerPositions[Integer.parseInt(position) - 1].equals("  "));
     };
 
     private void updatePlayerPosition(String currentUser, String positionOnBoard) {
