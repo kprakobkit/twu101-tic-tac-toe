@@ -7,9 +7,11 @@ import java.io.PrintStream;
  */
 public class View {
     private PrintStream printStream;
+    private Board board;
 
-    public View(PrintStream printStream) {
+    public View(PrintStream printStream, Board board) {
         this.printStream = printStream;
+        this.board = board;
     }
 
     void printDrawGamePrompt() {
@@ -18,5 +20,9 @@ public class View {
 
     void printInvalidPositionPrompt() {
         printStream.println("The position is taken. Please enter another position.");
+    }
+
+    public void printBoard() {
+        printStream.println(board);
     }
 }

@@ -7,28 +7,16 @@ import java.util.Arrays;
  * Created by kprakobk on 4/30/15.
  */
 public class Board {
-    private PrintStream printStream;
     private String[] playerPositions = new String[9];
 
     private String boardString;
 
-    public Board(PrintStream printStream) {
-        this.printStream = printStream;
+    public Board(PlayerPosition playerPosition) {
         initializePlayerPositions();
     }
 
     private void initializePlayerPositions() {
         Arrays.fill(playerPositions, "   ");
-    }
-
-    public void printBoard() {
-        boardString = playerPositions[0] + "|" +  playerPositions[1] + "|" + playerPositions[2] + "\n" +
-                      "-----------\n" +
-                      playerPositions[3] + "|" +  playerPositions[4] + "|" + playerPositions[5] + "\n" +
-                      "-----------\n" +
-                      playerPositions[6] + "|" +  playerPositions[7] + "|" + playerPositions[8];
-
-        printStream.println(boardString);
     }
 
     public void updatePlayerPosition(String currentUser, String positionOnBoard) {
@@ -37,25 +25,27 @@ public class Board {
     }
 
     public boolean isAValidPosition(String position) {
-        if(playerPositions[Integer.parseInt(position) - 1].equals(" X ")) {
-            return false;
-        }
-        if(playerPositions[Integer.parseInt(position) - 1].equals(" O ")) {
-            return false;
-        }
-
-        return true;
+        return !playerPositions[Integer.parseInt(position) - 1].equals(" X ") && !playerPositions[Integer.parseInt(position) - 1].equals(" O ");
     };
 
     public boolean isFull() {
         Boolean isFull = true;
 
-        for (int i = 0; i < playerPositions.length; i++) {
-            if(playerPositions[i].equals("   ")) {
+        for (String playerPosition : playerPositions) {
+            if (playerPosition.equals("   ")) {
                 isFull = false;
             }
         }
 
         return isFull;
+    }
+
+    @Override
+    public String toString() {
+        return  playerPositions[0] + "|" +  playerPositions[1] + "|" + playerPositions[2] + "\n" +
+                "-----------\n" +
+                playerPositions[3] + "|" +  playerPositions[4] + "|" + playerPositions[5] + "\n" +
+                "-----------\n" +
+                playerPositions[6] + "|" +  playerPositions[7] + "|" + playerPositions[8];
     }
 }

@@ -2,7 +2,6 @@ package com.twu.tictactoe;
 
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.PrintStream;
@@ -13,14 +12,18 @@ import static org.mockito.Mockito.verify;
 /**
  * Created by kprakobk on 4/30/15.
  */
-public class BoardTest {
+public class ViewTest {
     private PrintStream printStream;
     private Board board;
+    private View view;
+    private PlayerPosition playerPosition;
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
-        board = new Board(printStream);
+        playerPosition = new PlayerPosition();
+        board = new Board(playerPosition);
+        view = new View(printStream, board);
     }
 
     @Test
@@ -31,7 +34,7 @@ public class BoardTest {
                              "-----------\n" +
                              "   |   |   ";
 
-        board.printBoard();
+        view.printBoard();
 
         verify(printStream).println(boardString);
     }
@@ -45,7 +48,8 @@ public class BoardTest {
                                 "   |   |   ";
 
         board.updatePlayerPosition("1", "2");
-        board.printBoard();
+
+        view.printBoard();
 
         verify(printStream).println(newBoardString);
     }

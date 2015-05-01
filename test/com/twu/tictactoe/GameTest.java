@@ -3,8 +3,6 @@ package com.twu.tictactoe;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.PrintStream;
-
 import static org.mockito.Mockito.*;
 
 /**
@@ -15,14 +13,12 @@ public class GameTest {
     private Board board;
     private Game game;
     private GameHelper gameHelper;
-    private PrintStream printStream;
     private View view;
 
     @Before
     public void setUp() throws Exception {
         board = mock(Board.class);
         gameHelper = mock(GameHelper.class);
-        printStream = mock(PrintStream.class);
         view = mock(View.class);
         game = new Game(board, gameHelper, view);
     }
@@ -33,7 +29,7 @@ public class GameTest {
 
         game.start();
 
-        verify(board, atLeast(1)).printBoard();
+        verify(view, atLeast(1)).printBoard();
     }
 
     @Test

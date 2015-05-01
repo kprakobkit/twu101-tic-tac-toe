@@ -16,7 +16,7 @@ public class Game {
     }
 
     public void start() {
-        board.printBoard();
+        view.printBoard();
 
         play();
 
@@ -29,7 +29,7 @@ public class Game {
 
             userInput = validateUserInput(userInput);
             board.updatePlayerPosition(currentPlayer, userInput);
-            board.printBoard();
+            view.printBoard();
 
             switchCurrentPlayer();
         }
