@@ -16,13 +16,15 @@ public class GameTest {
     private Game game;
     private GameHelper gameHelper;
     private PrintStream printStream;
+    private View view;
 
     @Before
     public void setUp() throws Exception {
         board = mock(Board.class);
         gameHelper = mock(GameHelper.class);
         printStream = mock(PrintStream.class);
-        game = new Game(board, gameHelper, printStream);
+        view = mock(View.class);
+        game = new Game(board, gameHelper, view);
     }
 
     @Test
@@ -50,7 +52,7 @@ public class GameTest {
 
         game.start();
 
-        verify(printStream, times(1)).println("The position is taken. Please enter another position.");
+        verify(view, times(1)).printInvalidPositionPrompt();
     }
 
     @Test
@@ -59,7 +61,7 @@ public class GameTest {
 
         game.start();
 
-        verify(printStream).println("Game is a draw");
+        verify(view).printDrawGamePrompt();
     }
 
     private void playGameOneTimeThroughWithTwoUsers() {

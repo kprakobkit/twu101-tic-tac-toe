@@ -1,20 +1,18 @@
 package com.twu.tictactoe;
 
-import java.io.PrintStream;
-
 /**
  * Created by kprakobk on 4/30/15.
  */
 public class Game {
     private Board board;
     private GameHelper gameHelper;
-    private PrintStream printStream;
+    private View view;
     private String currentPlayer = "1";
 
-    public Game(Board board, GameHelper gameHelper, PrintStream printStream) {
+    public Game(Board board, GameHelper gameHelper, View view) {
         this.board = board;
         this.gameHelper = gameHelper;
-        this.printStream = printStream;
+        this.view = view;
     }
 
     public void start() {
@@ -22,22 +20,28 @@ public class Game {
 
         play();
 
-        printStream.println("Game is a draw");
+        view.printDrawGamePrompt();
     }
 
     private void play() {
         while(!board.isFull()) {
             String userInput = gameHelper.askForUserInput(currentPlayer);
 
-            while(!board.isAValidPosition(userInput)) {
-                printStream.println("The position is taken. Please enter another position.");
-                userInput = gameHelper.askForUserInput(currentPlayer);
-            }
+            userInput = validateUserInput(userInput);
             board.updatePlayerPosition(currentPlayer, userInput);
             board.printBoard();
 
             switchCurrentPlayer();
         }
+    }
+
+    private String validateUserInput(String userInput) {
+        while(!board.isAValidPosition(userInput)) {
+            view.printInvalidPositionPrompt();
+            userInput = gameHelper.askForUserInput(currentPlayer);
+        }
+
+        return userInput;
     }
 
     private void switchCurrentPlayer() {

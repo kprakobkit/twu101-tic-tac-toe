@@ -10,7 +10,8 @@ public class Main {
         PrintStream out = System.out;
         Board board = new Board(out);
         GameHelper gameHelper = new GameHelper(out);
-        Game game = new Game(board, gameHelper, out);
+        View view = new View(out);
+        Game game = new Game(board, gameHelper, view);
         game.start();
     }
 }
