@@ -33,8 +33,8 @@ public class Game {
                 printStream.println("The position is taken. Please enter another position.");
                 userInput = gameHelper.askForUserInput(currentPlayer);
             }
-            board.redraw(currentPlayer, userInput);
-
+            board.updatePlayerPosition(currentPlayer, userInput);
+            board.printBoard();
             switchCurrentPlayer();
         }
     }

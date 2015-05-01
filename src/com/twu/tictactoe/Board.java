@@ -31,16 +31,11 @@ public class Board {
         printStream.println(boardString);
     }
 
-    public void redraw(String currentUser, String positionOnBoard) {
-        updatePlayerPosition(currentUser, positionOnBoard);
-        printBoard();
-    }
-
     public boolean isAValidPosition(String position) {
         return !(playerPositions[Integer.parseInt(position) - 1].equals("  "));
     };
 
-    private void updatePlayerPosition(String currentUser, String positionOnBoard) {
+    public void updatePlayerPosition(String currentUser, String positionOnBoard) {
         String mark = currentUser.equals("1") ? " X " : " O ";
         playerPositions[Integer.parseInt(positionOnBoard) - 1] = mark;
     }
