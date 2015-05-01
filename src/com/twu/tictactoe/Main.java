@@ -8,11 +8,11 @@ import java.io.PrintStream;
 public class Main {
     public static void main(String[] args) {
         PrintStream out = System.out;
-        String[] playerPosition = new String[9];
-        Board board = new Board(playerPosition);
-        GameHelper gameHelper = new GameHelper(out);
+        String[] cells = new String[9];
+        Board board = new Board(cells);
+        UserInputStream userInputStream = new UserInputStream(out);
         View view = new View(out, board);
-        Game game = new Game(board, gameHelper, view);
+        Game game = new Game(board, userInputStream, view);
 
         game.start();
     }

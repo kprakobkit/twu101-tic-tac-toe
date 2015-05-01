@@ -1,6 +1,5 @@
 package com.twu.tictactoe;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,24 +27,25 @@ public class BoardTest {
     @Test
     public void shouldBeTrueWhenBoardIsFull() {
         fillBoard();
+
         assertTrue(board.isFull());
     }
 
     @Test
     public void shouldBeFalseWhenInvalidPosition() {
-        board.updatePlayerPosition("1", "2");
+        board.updatePlayerPosition("1", 2);
 
-        assertFalse(board.isAValidPosition("2"));
+        assertFalse(board.isAValidCell(2));
     }
 
     @Test
     public void shouldBeTrueWhenValidPosition() {
-        assertTrue(board.isAValidPosition("1"));
+        assertTrue(board.isAValidCell(1));
     }
 
     private void fillBoard() {
         for (int i = 0; i < playerPosition.length; i++) {
-            board.updatePlayerPosition("1", String.valueOf(i + 1));
+            board.updatePlayerPosition("1", i+1);
         }
     }
 }

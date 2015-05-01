@@ -5,40 +5,39 @@ package com.twu.tictactoe;
  */
 public class Game {
     private Board board;
-    private GameHelper gameHelper;
+    private UserInputStream userInputStream;
     private View view;
     private String currentPlayer = "1";
 
-    public Game(Board board, GameHelper gameHelper, View view) {
+    public Game(Board board, UserInputStream userInputStream, View view) {
         this.board = board;
-        this.gameHelper = gameHelper;
+        this.userInputStream = userInputStream;
         this.view = view;
     }
 
     public void start() {
         view.printBoard();
 
-        play();
+        playUntilDone();
 
         view.printDrawGamePrompt();
     }
 
-    private void play() {
+    private void playUntilDone() {
         while(!board.isFull()) {
-            String userInput = gameHelper.askForUserInput(currentPlayer);
+            Integer validPosition = validateUserInput(userInputStream.askForCellPosition());
 
-            userInput = validateUserInput(userInput);
-            board.updatePlayerPosition(currentPlayer, userInput);
+            board.updatePlayerPosition(currentPlayer, validPosition);
             view.printBoard();
 
             switchCurrentPlayer();
         }
     }
 
-    private String validateUserInput(String userInput) {
-        while(!board.isAValidPosition(userInput)) {
+    private Integer validateUserInput(Integer userInput) {
+        while(!board.isAValidCell(userInput)) {
             view.printInvalidPositionPrompt();
-            userInput = gameHelper.askForUserInput(currentPlayer);
+            userInput = userInputStream.askForCellPosition();
         }
 
         return userInput;

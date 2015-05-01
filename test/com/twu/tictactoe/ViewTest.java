@@ -45,8 +45,8 @@ public class ViewTest {
                                 "-----------\n" +
                                 "   |   |   ";
 
-        board.updatePlayerPosition("1", "2");
-        board.updatePlayerPosition("2", "1");
+        board.updatePlayerPosition("1", 2);
+        board.updatePlayerPosition("2", 1);
 
         view.printBoard();
 

@@ -12,15 +12,15 @@ public class GameTest {
 
     private Board board;
     private Game game;
-    private GameHelper gameHelper;
+    private UserInputStream userInputStream;
     private View view;
 
     @Before
     public void setUp() throws Exception {
         board = mock(Board.class);
-        gameHelper = mock(GameHelper.class);
+        userInputStream = mock(UserInputStream.class);
         view = mock(View.class);
-        game = new Game(board, gameHelper, view);
+        game = new Game(board, userInputStream, view);
     }
 
     @Test
@@ -33,13 +33,12 @@ public class GameTest {
     }
 
     @Test
-    public void shouldRedrawBoardAfterReceivingPositionFromUser() {
-        playGameOneTimeThroughWithTwoUsers();
+    public void shouldPrintNewBoardAfterValidPosition() {
+        playGameOneTimeThrough();
 
         game.start();
 
-        verify(board, times(1)).updatePlayerPosition("1", "1");
-        verify(board, times(1)).updatePlayerPosition("2", "2");
+        verify(board, times(1)).updatePlayerPosition("1", 1);
     }
 
     @Test
@@ -53,36 +52,22 @@ public class GameTest {
 
     @Test
     public void shouldLetPlayersFillBoardUntilFull() {
-        playGameUntilBoardIsFull();
+        when(board.isFull()).thenReturn(true);
 
         game.start();
 
         verify(view).printDrawGamePrompt();
     }
 
-    private void playGameOneTimeThroughWithTwoUsers() {
-        when(board.isFull()).thenReturn(false).thenReturn(false).thenReturn(true);
-        when(board.isAValidPosition("1")).thenReturn(true);
-        when(board.isAValidPosition("2")).thenReturn(true);
-        when(gameHelper.askForUserInput("1")).thenReturn("1");
-        when(gameHelper.askForUserInput("2")).thenReturn("2");
+    private void playGameOneTimeThrough() {
+        when(board.isFull()).thenReturn(false).thenReturn(true);
+        when(board.isAValidCell(1)).thenReturn(true);
+        when(userInputStream.askForCellPosition()).thenReturn(1);
     }
 
     private void playGameOneTimeThroughWithOneInvalidPosition() {
-        when(board.isFull()).thenReturn(false).thenReturn(true);
-        when(board.isAValidPosition("1")).thenReturn(false);
-        when(board.isAValidPosition("2")).thenReturn(true);
-        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
-        when(gameHelper.askForUserInput("2")).thenReturn("3");
-    }
-
-    private void playGameUntilBoardIsFull() {
-        when(board.isFull()).thenReturn(false).thenReturn(false).thenReturn(true);
-        when(board.isAValidPosition("1")).thenReturn(true);
-        when(board.isAValidPosition("2")).thenReturn(true);
-        when(board.isAValidPosition("3")).thenReturn(true);
-        when(board.isAValidPosition("4")).thenReturn(true);
-        when(gameHelper.askForUserInput("1")).thenReturn("1").thenReturn("2");
-        when(gameHelper.askForUserInput("2")).thenReturn("3").thenReturn("4");
+        when(board.isFull()).thenReturn(false, true);
+        when(board.isAValidCell(1)).thenReturn(false, true);
+        when(userInputStream.askForCellPosition()).thenReturn(1,1);
     }
 }

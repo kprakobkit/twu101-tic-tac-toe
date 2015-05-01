@@ -1,39 +1,37 @@
 package com.twu.tictactoe;
 
-import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
  * Created by kprakobk on 4/30/15.
  */
 public class Board {
-    private String[] playerPositions;
+    private String[] cells;
 
-    public Board(String[] playerPosition) {
-        this.playerPositions = playerPosition;
-        initializePlayerPositions();
+    public Board(String[] cells) {
+        this.cells = cells;
+        initializeCells();
     }
 
-    private void initializePlayerPositions() {
-        Arrays.fill(playerPositions, "   ");
+    private void initializeCells() {
+        Arrays.fill(cells, "   ");
     }
 
-    public void updatePlayerPosition(String currentUser, String positionOnBoard) {
+    public void updatePlayerPosition(String currentUser, Integer cell) {
         String mark = currentUser.equals("1") ? " X " : " O ";
-        playerPositions[Integer.parseInt(positionOnBoard) - 1] = mark;
+        cells[cell-1] = mark;
     }
 
-    public boolean isAValidPosition(String position) {
-        return !playerPositions[Integer.parseInt(position) - 1].equals(" X ") && !playerPositions[Integer.parseInt(position) - 1].equals(" O ");
+    public boolean isAValidCell(Integer cell) {
+        return !cells[cell-1].equals(" X ") && !cells[cell-1].equals(" O ");
     };
 
     public boolean isFull() {
         Boolean isFull = true;
 
-        for (String playerPosition : playerPositions) {
+        for (String playerPosition : cells) {
             if (playerPosition.equals("   ")) {
-                isFull = false;
+                return false;
             }
         }
 
@@ -42,10 +40,10 @@ public class Board {
 
     @Override
     public String toString() {
-        return  playerPositions[0] + "|" +  playerPositions[1] + "|" + playerPositions[2] + "\n" +
+        return  cells[0] + "|" +  cells[1] + "|" + cells[2] + "\n" +
                 "-----------\n" +
-                playerPositions[3] + "|" +  playerPositions[4] + "|" + playerPositions[5] + "\n" +
+                cells[3] + "|" +  cells[4] + "|" + cells[5] + "\n" +
                 "-----------\n" +
-                playerPositions[6] + "|" +  playerPositions[7] + "|" + playerPositions[8];
+                cells[6] + "|" +  cells[7] + "|" + cells[8];
     }
 }

@@ -8,16 +8,14 @@ import java.io.PrintStream;
 /**
  * Created by kprakobk on 4/30/15.
  */
-public class GameHelper {
+public class UserInputStream {
     private PrintStream printStream;
 
-    public GameHelper(PrintStream printStream) {
+    public UserInputStream(PrintStream printStream) {
         this.printStream = printStream;
     }
 
-    public String askForUserInput(String currentPlayer) {
-        printStream.println("Player " + currentPlayer + " - Please select a position by entering a number between 1 and 9:");
-
+    public Integer askForCellPosition() {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String userInput = "";
         try {
@@ -26,6 +24,6 @@ public class GameHelper {
             e.printStackTrace();
         }
 
-        return userInput;
+        return Integer.parseInt(userInput);
     }
 }
