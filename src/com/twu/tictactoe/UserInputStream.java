@@ -15,7 +15,7 @@ public class UserInputStream {
         this.printStream = printStream;
     }
 
-    public Integer askForCellPosition() {
+    public Integer askForCell() {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String userInput = "";
         try {

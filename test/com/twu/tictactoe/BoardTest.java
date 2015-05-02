@@ -11,12 +11,12 @@ import static org.junit.Assert.assertTrue;
  */
 public class BoardTest {
     private Board board;
-    private String[] playerPosition;
+    private String[] cells;
 
     @Before
     public void setUp() {
-        playerPosition = new String[9];
-        board = new Board(playerPosition);
+        cells = new String[9];
+        board = new Board(cells);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class BoardTest {
     }
 
     private void fillBoard() {
-        for (int i = 0; i < playerPosition.length; i++) {
+        for (int i = 0; i < cells.length; i++) {
             board.updateCell("1", i + 1);
         }
     }

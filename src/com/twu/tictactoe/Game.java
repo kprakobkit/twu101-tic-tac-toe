@@ -30,22 +30,22 @@ public class Game {
 
     private void playUntilDone() {
         while(!board.isFull()) {
-            Integer validPosition = validateUserInput(userInputStream.askForCellPosition());
+            Integer validCell = validateCell(userInputStream.askForCell());
 
-            board.updateCell(currentPlayer.getMark(), validPosition);
+            board.updateCell(currentPlayer.getMark(), validCell);
             view.printBoard();
 
             switchCurrentPlayer();
         }
     }
 
-    private Integer validateUserInput(Integer userInput) {
-        while(!board.isAValidCell(userInput)) {
+    private Integer validateCell(Integer cell) {
+        while(!board.isAValidCell(cell)) {
             view.printInvalidPositionPrompt();
-            userInput = userInputStream.askForCellPosition();
+            cell = userInputStream.askForCell();
         }
 
-        return userInput;
+        return cell;
     }
 
     private void switchCurrentPlayer() {

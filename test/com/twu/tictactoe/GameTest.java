@@ -67,12 +67,12 @@ public class GameTest {
         when(board.isFull()).thenReturn(false).thenReturn(true);
         when(board.isAValidCell(1)).thenReturn(true);
         when(playerOne.getMark()).thenReturn("O");
-        when(userInputStream.askForCellPosition()).thenReturn(1);
+        when(userInputStream.askForCell()).thenReturn(1);
     }
 
     private void playGameOneTimeThroughWithOneInvalidPosition() {
         when(board.isFull()).thenReturn(false, true);
         when(board.isAValidCell(1)).thenReturn(false, true);
-        when(userInputStream.askForCellPosition()).thenReturn(1,1);
+        when(userInputStream.askForCell()).thenReturn(1,1);
     }
 }

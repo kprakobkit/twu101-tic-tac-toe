@@ -8,12 +8,18 @@ import java.io.PrintStream;
 public class Main {
     public static void main(String[] args) {
         PrintStream out = System.out;
+
+        // Initialize board
         String[] cells = new String[9];
         Board board = new Board(cells);
-        UserInputStream userInputStream = new UserInputStream(out);
+
+        // Initialize players
         Player playerOne = new Player("X");
         Player playerTwo = new Player("O");
+
+        UserInputStream userInputStream = new UserInputStream(out);
         View view = new View(out, board);
+
         Game game = new Game(board, userInputStream, view, playerOne, playerTwo);
 
         game.start();
