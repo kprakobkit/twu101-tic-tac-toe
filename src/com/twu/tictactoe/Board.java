@@ -26,15 +26,13 @@ public class Board {
     };
 
     public boolean isFull() {
-        Boolean isFull = true;
-
         for (String cell : cells) {
             if (cell.equals(" ")) {
                 return false;
             }
         }
 
-        return isFull;
+        return true;
     }
 
     @Override

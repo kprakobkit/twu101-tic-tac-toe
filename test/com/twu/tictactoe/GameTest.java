@@ -33,7 +33,7 @@ public class GameTest {
 
         game.start();
 
-        verify(view, atLeast(1)).printBoard();
+        verify(view, atLeast(1)).printBoardWithInstructions();
     }
 
     @Test

@@ -21,7 +21,7 @@ public class Game {
     }
 
     public void start() {
-        view.printBoard();
+        view.printBoardWithInstructions();
 
         playUntilDone();
 
@@ -33,7 +33,7 @@ public class Game {
             Integer validCell = validateCell(userInputStream.askForCell());
 
             board.updateCell(currentPlayer.getMark(), validCell);
-            view.printBoard();
+            view.printBoardWithInstructions();
 
             switchCurrentPlayer();
         }

@@ -48,7 +48,7 @@ public class ViewTest {
         board.updateCell("X", 2);
         board.updateCell("O", 1);
 
-        view.printBoard();
+        view.printBoardWithInstructions();
 
         assertEquals(boardString, board.toString());
     }
