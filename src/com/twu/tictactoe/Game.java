@@ -7,12 +7,17 @@ public class Game {
     private Board board;
     private UserInputStream userInputStream;
     private View view;
-    private String currentPlayer = "1";
+    private Player playerOne;
+    private Player playerTwo;
+    private Player currentPlayer;
 
-    public Game(Board board, UserInputStream userInputStream, View view) {
+    public Game(Board board, UserInputStream userInputStream, View view, Player playerOne, Player playerTwo) {
         this.board = board;
         this.userInputStream = userInputStream;
         this.view = view;
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+        this.currentPlayer = playerOne;
     }
 
     public void start() {
@@ -27,7 +32,7 @@ public class Game {
         while(!board.isFull()) {
             Integer validPosition = validateUserInput(userInputStream.askForCellPosition());
 
-            board.updatePlayerPosition(currentPlayer, validPosition);
+            board.updateCell(currentPlayer.getMark(), validPosition);
             view.printBoard();
 
             switchCurrentPlayer();
@@ -44,6 +49,6 @@ public class Game {
     }
 
     private void switchCurrentPlayer() {
-        currentPlayer = currentPlayer.equals("1") ? "2" : "1";
+        currentPlayer = currentPlayer.equals(playerOne) ? playerTwo : playerOne;
     }
 }

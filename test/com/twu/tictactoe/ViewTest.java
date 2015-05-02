@@ -34,7 +34,7 @@ public class ViewTest {
                              "-----------\n" +
                              "   |   |   ";
 
-        assertEquals(board.toString(), boardString);
+        assertEquals(boardString, board.toString());
     }
 
     @Test
@@ -45,11 +45,11 @@ public class ViewTest {
                                 "-----------\n" +
                                 "   |   |   ";
 
-        board.updatePlayerPosition("1", 2);
-        board.updatePlayerPosition("2", 1);
+        board.updateCell("X", 2);
+        board.updateCell("O", 1);
 
         view.printBoard();
 
-        assertEquals(board.toString(), boardString);
+        assertEquals(boardString, board.toString());
     }
 }

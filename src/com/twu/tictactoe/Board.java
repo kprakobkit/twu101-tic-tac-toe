@@ -14,23 +14,22 @@ public class Board {
     }
 
     private void initializeCells() {
-        Arrays.fill(cells, "   ");
+        Arrays.fill(cells, " ");
     }
 
-    public void updatePlayerPosition(String currentUser, Integer cell) {
-        String mark = currentUser.equals("1") ? " X " : " O ";
+    public void updateCell(String mark, Integer cell) {
         cells[cell-1] = mark;
     }
 
     public boolean isAValidCell(Integer cell) {
-        return !cells[cell-1].equals(" X ") && !cells[cell-1].equals(" O ");
+        return !cells[cell-1].equals("X") && !cells[cell-1].equals("O");
     };
 
     public boolean isFull() {
         Boolean isFull = true;
 
-        for (String playerPosition : cells) {
-            if (playerPosition.equals("   ")) {
+        for (String cell : cells) {
+            if (cell.equals(" ")) {
                 return false;
             }
         }
@@ -40,10 +39,10 @@ public class Board {
 
     @Override
     public String toString() {
-        return  cells[0] + "|" +  cells[1] + "|" + cells[2] + "\n" +
+        return  " " + cells[0] + " | " +  cells[1] + " | " + cells[2] + " \n" +
                 "-----------\n" +
-                cells[3] + "|" +  cells[4] + "|" + cells[5] + "\n" +
+                " " + cells[3] + " | " +  cells[4] + " | " + cells[5] + " \n" +
                 "-----------\n" +
-                cells[6] + "|" +  cells[7] + "|" + cells[8];
+                " " + cells[6] + " | " +  cells[7] + " | " + cells[8] + " ";
     }
 }

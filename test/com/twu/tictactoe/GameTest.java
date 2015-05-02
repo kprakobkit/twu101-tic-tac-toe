@@ -14,13 +14,17 @@ public class GameTest {
     private Game game;
     private UserInputStream userInputStream;
     private View view;
+    private Player playerOne;
+    private Player playerTwo;
 
     @Before
     public void setUp() throws Exception {
         board = mock(Board.class);
         userInputStream = mock(UserInputStream.class);
         view = mock(View.class);
-        game = new Game(board, userInputStream, view);
+        playerOne = mock(Player.class);
+        playerTwo = mock(Player.class);
+        game = new Game(board, userInputStream, view, playerOne, playerTwo);
     }
 
     @Test
@@ -33,12 +37,12 @@ public class GameTest {
     }
 
     @Test
-    public void shouldPrintNewBoardAfterValidPosition() {
+    public void shouldPrintNewBoardAfterValidCell() {
         playGameOneTimeThrough();
 
         game.start();
 
-        verify(board, times(1)).updatePlayerPosition("1", 1);
+        verify(board, times(1)).updateCell("O", 1);
     }
 
     @Test
@@ -62,6 +66,7 @@ public class GameTest {
     private void playGameOneTimeThrough() {
         when(board.isFull()).thenReturn(false).thenReturn(true);
         when(board.isAValidCell(1)).thenReturn(true);
+        when(playerOne.getMark()).thenReturn("O");
         when(userInputStream.askForCellPosition()).thenReturn(1);
     }
 

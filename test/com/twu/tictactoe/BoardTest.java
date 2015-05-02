@@ -33,7 +33,7 @@ public class BoardTest {
 
     @Test
     public void shouldBeFalseWhenInvalidPosition() {
-        board.updatePlayerPosition("1", 2);
+        board.updateCell("X", 2);
 
         assertFalse(board.isAValidCell(2));
     }
@@ -45,7 +45,7 @@ public class BoardTest {
 
     private void fillBoard() {
         for (int i = 0; i < playerPosition.length; i++) {
-            board.updatePlayerPosition("1", i+1);
+            board.updateCell("1", i + 1);
         }
     }
 }
