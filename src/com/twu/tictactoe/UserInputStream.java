@@ -9,11 +9,6 @@ import java.io.PrintStream;
  * Created by kprakobk on 4/30/15.
  */
 public class UserInputStream {
-    private PrintStream printStream;
-
-    public UserInputStream(PrintStream printStream) {
-        this.printStream = printStream;
-    }
 
     public Integer askForCell() {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));

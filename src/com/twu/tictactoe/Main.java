@@ -17,7 +17,7 @@ public class Main {
         Player playerOne = new Player("X");
         Player playerTwo = new Player("O");
 
-        UserInputStream userInputStream = new UserInputStream(out);
+        UserInputStream userInputStream = new UserInputStream();
         View view = new View(out, board);
 
         Game game = new Game(board, userInputStream, view, playerOne, playerTwo);
