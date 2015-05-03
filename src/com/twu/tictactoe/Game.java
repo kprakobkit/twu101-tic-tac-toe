@@ -42,6 +42,10 @@ public class Game {
             switchCurrentPlayer();
         }
 
+        displayResult();
+    }
+
+    private void displayResult() {
         if (winner != null) {
             view.printWinner(currentPlayer.getName());
         } else {
