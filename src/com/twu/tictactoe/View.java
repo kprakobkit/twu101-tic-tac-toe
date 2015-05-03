@@ -28,6 +28,6 @@ public class View {
     }
 
     public void printWinner(String name) {
-        printStream.println("Player " + name + " wins!");
+        printStream.println(name + " wins!");
     }
 }

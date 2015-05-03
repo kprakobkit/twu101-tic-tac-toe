@@ -52,15 +52,15 @@ public class Board {
     }
 
     private boolean checkRows() {
-        return  checkFirstRow() ||
-                checkSecondRow() ||
-                checkThirdRow();
+        return  checkTopRow() ||
+                checkMiddleRow() ||
+                checkBottomRow();
     }
 
     private boolean checkColumns() {
-        return  checkFirstColumn() ||
-                checkSecondColumn() ||
-                checkThirdColumn();
+        return  checkLeftColumn() ||
+                checkMiddleColumn() ||
+                checkRightColumn();
     }
 
     private boolean checkDiagonals() {
@@ -68,27 +68,27 @@ public class Board {
                 checkSecondDiag();
     }
 
-    private boolean checkFirstRow() {
+    private boolean checkTopRow() {
         return cells[0].equals(cells[1]) && cells[1].equals(cells[2]) && !cells[0].equals(" ");
     }
 
-    private boolean checkSecondRow() {
+    private boolean checkMiddleRow() {
         return cells[3].equals(cells[4]) && cells[4].equals(cells[5]) && !cells[3].equals(" ");
     }
 
-    private boolean checkThirdRow() {
+    private boolean checkBottomRow() {
         return  cells[6].equals(cells[7]) && cells[7].equals(cells[8]) && !cells[6].equals(" ");
     }
 
-    private boolean checkFirstColumn() {
+    private boolean checkLeftColumn() {
         return cells[0].equals(cells[3]) && cells[3].equals(cells[6]) && !cells[0].equals(" ");
     }
 
-    private boolean checkSecondColumn() {
+    private boolean checkMiddleColumn() {
         return cells[1].equals(cells[4]) && cells[4].equals(cells[7]) && !cells[1].equals(" ");
     }
 
-    private boolean checkThirdColumn() {
+    private boolean checkRightColumn() {
         return cells[2].equals(cells[5]) && cells[5].equals(cells[8]) && !cells[2].equals(" ");
     }
 
