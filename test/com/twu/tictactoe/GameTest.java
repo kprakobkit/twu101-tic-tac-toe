@@ -55,7 +55,7 @@ public class GameTest {
     }
 
     @Test
-    public void shouldLetPlayersFillBoardUntilFull() {
+    public void shouldPrintDrawGameWhenBoardIsFull() {
         when(board.isFull()).thenReturn(true);
 
         game.start();
