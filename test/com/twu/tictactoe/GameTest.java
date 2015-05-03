@@ -1,6 +1,7 @@
 package com.twu.tictactoe;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
@@ -37,24 +38,6 @@ public class GameTest {
     }
 
     @Test
-    public void shouldPrintNewBoardAfterValidCell() {
-        playGameOneTimeThrough();
-
-        game.start();
-
-        verify(board, times(1)).updateCell("O", 1);
-    }
-
-    @Test
-    public void shouldPromptUserToReenterPositionUntilValid() {
-        playGameOneTimeThroughWithOneInvalidPosition();
-
-        game.start();
-
-        verify(view, times(1)).printInvalidPositionPrompt();
-    }
-
-    @Test
     public void shouldPrintDrawGameWhenBoardIsFull() {
         when(board.isFull()).thenReturn(true);
 
@@ -65,24 +48,10 @@ public class GameTest {
 
     @Test
     public void shouldPrintTheCorrectWinner() {
-        playGameOneTimeThrough();
         when(board.hasWinningCombination()).thenReturn(true);
 
         game.start();
 
         verify(view).printWinner(playerOne.getName());
-    }
-
-    private void playGameOneTimeThrough() {
-        when(board.isFull()).thenReturn(false).thenReturn(true);
-        when(board.isAValidCell(1)).thenReturn(true);
-        when(playerOne.getMark()).thenReturn("O");
-        when(userInputStream.askForCell()).thenReturn(1);
-    }
-
-    private void playGameOneTimeThroughWithOneInvalidPosition() {
-        when(board.isFull()).thenReturn(false, true);
-        when(board.isAValidCell(1)).thenReturn(false, true);
-        when(userInputStream.askForCell()).thenReturn(1,1);
     }
 }

@@ -15,12 +15,13 @@ public class Main {
         String[] cells = new String[9];
         Board board = new Board(cells);
 
-        // Initialize players
-        Player playerOne = new Player("X", "Player 1");
-        Player playerTwo = new Player("O", "Player 2");
-
         UserInputStream userInputStream = new UserInputStream(new BufferedReader(new InputStreamReader(System.in)));
         View view = new View(out, board);
+
+        // Initialize players
+        Player playerOne = new Player("X", "Player 1", board, userInputStream, view);
+        Player playerTwo = new Player("O", "Player 2", board, userInputStream, view);
+
 
         Game game = new Game(board, userInputStream, view, playerOne, playerTwo);
 

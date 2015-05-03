@@ -16,7 +16,7 @@ public class UserInputStream {
         this.bufferedReader = bufferedReader;
     }
 
-    public Integer askForCell() {
+    public String getInput() {
         String userInput = "";
         try {
             userInput = bufferedReader.readLine();
@@ -24,6 +24,6 @@ public class UserInputStream {
             e.printStackTrace();
         }
 
-        return Integer.parseInt(userInput);
+        return userInput;
     }
 }

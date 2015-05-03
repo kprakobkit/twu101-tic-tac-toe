@@ -1,6 +1,7 @@
 package com.twu.tictactoe;
 
 import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -15,12 +16,12 @@ import static org.mockito.Mockito.when;
  */
 public class UserInputStreamTest {
     @Test
-    public void shouldReturnAnInt() throws IOException {
+    public void shouldReturnAString() throws IOException {
         BufferedReader bufferedReader = mock(BufferedReader.class);
         when(bufferedReader.readLine()).thenReturn("2");
         UserInputStream userInputStream = new UserInputStream(bufferedReader);
-        Integer result = userInputStream.askForCell();
-        Integer expected = 2;
+        String result = userInputStream.getInput();
+        String expected = "2";
 
         assertEquals(expected, result);
     }

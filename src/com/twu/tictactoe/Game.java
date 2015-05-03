@@ -30,9 +30,8 @@ public class Game {
 
     private void playUntilDone() {
         while(!board.isFull()) {
-            Integer validCell = validateCell(userInputStream.askForCell());
 
-            board.updateCell(currentPlayer.getMark(), validCell);
+            currentPlayer.makeAMove();
 
             if(board.hasWinningCombination()) {
                 view.printWinner(currentPlayer.getName());
@@ -43,15 +42,6 @@ public class Game {
 
             switchCurrentPlayer();
         }
-    }
-
-    private Integer validateCell(Integer cell) {
-        while(!board.isAValidCell(cell)) {
-            view.printInvalidPositionPrompt();
-            cell = userInputStream.askForCell();
-        }
-
-        return cell;
     }
 
     private void switchCurrentPlayer() {
