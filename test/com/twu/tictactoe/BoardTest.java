@@ -70,10 +70,15 @@ public class BoardTest {
         assertTrue(board.hasWinningCombination());
     }
 
+    @Test
+    public void shouldBeFalseWhenThereIsNoWinningCombination() {
+        assertFalse(board.hasWinningCombination());
+    }
+
     private void createDiagonalWinningCombination() {
         board.updateCell("X", 1);
         board.updateCell("X", 5);
-        board.updateCell("X", 8);
+        board.updateCell("X", 9);
     }
 
     private void createVerticalWinningCombination() {

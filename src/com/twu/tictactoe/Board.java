@@ -7,6 +7,9 @@ import java.util.Arrays;
  */
 public class Board {
     private String[] cells;
+    private final Integer[][] ROW_WINNING_COMB = {{0,1,2},{3,4,5},{6,7,8}};
+    private final Integer[][] COLUMN_WINNING_COMB = {{0,3,6},{1,4,7},{2,5,8}};
+    private final Integer[][] DIAG_WINNING_COMB = {{0,4,8},{2,4,6}};
 
     public Board(String[] cells) {
         this.cells = cells;
@@ -61,31 +64,39 @@ public class Board {
     }
 
     private boolean checkDiagonals() {
-        return  cells[0].equals(cells[4]) && cells[4].equals(cells[7]) && !cells[0].equals(" ") ||
-                cells[6].equals(cells[4]) && cells[4].equals(cells[2]) && !cells[6].equals(" ");
-    }
-
-    private boolean checkThirdRow() {
-        return  cells[6].equals(cells[7]) && cells[7].equals(cells[8]) && !cells[6].equals(" ");
-    }
-
-    private boolean checkSecondRow() {
-        return cells[3].equals(cells[4]) && cells[4].equals(cells[5]) && !cells[3].equals(" ");
+        return  checkFirstDiag() ||
+                checkSecondDiag();
     }
 
     private boolean checkFirstRow() {
         return cells[0].equals(cells[1]) && cells[1].equals(cells[2]) && !cells[0].equals(" ");
     }
 
-    private boolean checkThirdColumn() {
-        return cells[2].equals(cells[5]) && cells[5].equals(cells[8]) && !cells[2].equals(" ");
+    private boolean checkSecondRow() {
+        return cells[3].equals(cells[4]) && cells[4].equals(cells[5]) && !cells[3].equals(" ");
+    }
+
+    private boolean checkThirdRow() {
+        return  cells[6].equals(cells[7]) && cells[7].equals(cells[8]) && !cells[6].equals(" ");
+    }
+
+    private boolean checkFirstColumn() {
+        return cells[0].equals(cells[3]) && cells[3].equals(cells[6]) && !cells[0].equals(" ");
     }
 
     private boolean checkSecondColumn() {
         return cells[1].equals(cells[4]) && cells[4].equals(cells[7]) && !cells[1].equals(" ");
     }
 
-    private boolean checkFirstColumn() {
-        return cells[0].equals(cells[3]) && cells[3].equals(cells[6]) && !cells[0].equals(" ");
+    private boolean checkThirdColumn() {
+        return cells[2].equals(cells[5]) && cells[5].equals(cells[8]) && !cells[2].equals(" ");
+    }
+
+    private boolean checkFirstDiag() {
+        return cells[0].equals(cells[4]) && cells[4].equals(cells[8]) && !cells[0].equals(" ");
+    }
+
+    private boolean checkSecondDiag() {
+        return cells[6].equals(cells[4]) && cells[4].equals(cells[2]) && !cells[6].equals(" ");
     }
 }
