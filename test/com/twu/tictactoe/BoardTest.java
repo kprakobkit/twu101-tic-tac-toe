@@ -48,4 +48,43 @@ public class BoardTest {
             board.updateCell("1", i + 1);
         }
     }
+
+    @Test
+    public void shouldBeTrueWhenThereIsAHorizontalWinningCombination() {
+        createHoritontalWinningCombination();
+
+        assertTrue(board.hasWinningCombination());
+    }
+
+    @Test
+    public void shouldBeTrueWhenThereIsAVerticalWinningCombination() {
+        createVerticalWinningCombination();
+
+        assertTrue(board.hasWinningCombination());
+    }
+
+    @Test
+    public void shouldBeTrueWhenThereIsADiagonalWinningCombination() {
+        createDiagonalWinningCombination();
+
+        assertTrue(board.hasWinningCombination());
+    }
+
+    private void createDiagonalWinningCombination() {
+        board.updateCell("X", 1);
+        board.updateCell("X", 5);
+        board.updateCell("X", 8);
+    }
+
+    private void createVerticalWinningCombination() {
+        board.updateCell("X", 1);
+        board.updateCell("X", 4);
+        board.updateCell("X", 7);
+    }
+
+    private void createHoritontalWinningCombination() {
+        board.updateCell("X", 1);
+        board.updateCell("X", 2);
+        board.updateCell("X", 3);
+    }
 }
