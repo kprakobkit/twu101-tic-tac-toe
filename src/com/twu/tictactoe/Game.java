@@ -22,8 +22,7 @@ public class Game {
     }
 
     public void start() {
-        view.printBoard();
-        view.printInstructions();
+        view.printBoardWithInstructions();
 
         playUntilDone();
     }
@@ -38,14 +37,12 @@ public class Game {
                 break;
             }
 
-            view.printBoard();
-            view.printInstructions();
+            view.printBoardWithInstructions();
 
             switchCurrentPlayer();
         }
 
         if (winner != null) {
-            view.printBoard();
             view.printWinner(currentPlayer.getName());
         } else {
             view.printDrawGamePrompt();
