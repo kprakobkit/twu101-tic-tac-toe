@@ -10,8 +10,13 @@ import java.io.PrintStream;
  */
 public class UserInputStream {
 
+    private BufferedReader bufferedReader;
+
+    public UserInputStream(BufferedReader bufferedReader) {
+        this.bufferedReader = bufferedReader;
+    }
+
     public Integer askForCell() {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String userInput = "";
         try {
             userInput = bufferedReader.readLine();

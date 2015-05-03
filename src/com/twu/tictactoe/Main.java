@@ -1,5 +1,7 @@
 package com.twu.tictactoe;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 
 /**
@@ -17,7 +19,7 @@ public class Main {
         Player playerOne = new Player("X");
         Player playerTwo = new Player("O");
 
-        UserInputStream userInputStream = new UserInputStream();
+        UserInputStream userInputStream = new UserInputStream(new BufferedReader(new InputStreamReader(System.in)));
         View view = new View(out, board);
 
         Game game = new Game(board, userInputStream, view, playerOne, playerTwo);
