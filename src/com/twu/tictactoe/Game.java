@@ -10,6 +10,7 @@ public class Game {
     private Player playerOne;
     private Player playerTwo;
     private Player currentPlayer;
+    private Player winner;
 
     public Game(Board board, UserInputStream userInputStream, View view, Player playerOne, Player playerTwo) {
         this.board = board;
@@ -21,11 +22,10 @@ public class Game {
     }
 
     public void start() {
-        view.printBoardWithInstructions();
+        view.printBoard();
+        view.printInstructions();
 
         playUntilDone();
-
-        view.printDrawGamePrompt();
     }
 
     private void playUntilDone() {
@@ -34,13 +34,21 @@ public class Game {
             currentPlayer.makeAMove();
 
             if(board.hasWinningCombination()) {
-                view.printWinner(currentPlayer.getName());
+                winner = currentPlayer;
                 break;
             }
 
-            view.printBoardWithInstructions();
+            view.printBoard();
+            view.printInstructions();
 
             switchCurrentPlayer();
+        }
+
+        if (winner != null) {
+            view.printBoard();
+            view.printWinner(currentPlayer.getName());
+        } else {
+            view.printDrawGamePrompt();
         }
     }
 

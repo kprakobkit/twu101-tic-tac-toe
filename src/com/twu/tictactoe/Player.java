@@ -24,10 +24,10 @@ public class Player {
 
     public void makeAMove() {
         Integer cell = askForCell();
-        board.updateCell(name, cell);
+        board.updateCell(mark, cell);
     }
 
-    public Integer askForCell() {
+    private Integer askForCell() {
         Integer validCell = validateCell(Integer.parseInt(userInputStream.getInput()));
 
         return validCell;

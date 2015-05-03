@@ -37,7 +37,7 @@ public class PlayerTest {
 
         player.makeAMove();
 
-        verify(board).updateCell(name, 1);
+        verify(board).updateCell(mark, 1);
     }
 
     @Test

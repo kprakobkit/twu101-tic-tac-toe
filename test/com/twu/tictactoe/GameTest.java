@@ -1,7 +1,6 @@
 package com.twu.tictactoe;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
@@ -34,7 +33,7 @@ public class GameTest {
 
         game.start();
 
-        verify(view, atLeast(1)).printBoardWithInstructions();
+        verify(view, atLeast(1)).printBoard();
     }
 
     @Test

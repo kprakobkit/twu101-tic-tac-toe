@@ -22,8 +22,11 @@ public class View {
         printStream.println("The position is taken. Please enter another position.");
     }
 
-    public void printBoardWithInstructions() {
+    public void printBoard() {
         printStream.println(board);
+    }
+
+    public void printInstructions() {
         printStream.println("Please enter a cell number between 1 - 9");
     }
 
