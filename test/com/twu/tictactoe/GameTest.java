@@ -63,6 +63,16 @@ public class GameTest {
         verify(view).printDrawGamePrompt();
     }
 
+    @Test
+    public void shouldPrintTheCorrectWinner() {
+        playGameOneTimeThrough();
+        when(board.hasWinningCombination()).thenReturn(true);
+
+        game.start();
+
+        verify(view).printWinner(playerOne.getName());
+    }
+
     private void playGameOneTimeThrough() {
         when(board.isFull()).thenReturn(false).thenReturn(true);
         when(board.isAValidCell(1)).thenReturn(true);

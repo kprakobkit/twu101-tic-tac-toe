@@ -16,8 +16,8 @@ public class Main {
         Board board = new Board(cells);
 
         // Initialize players
-        Player playerOne = new Player("X");
-        Player playerTwo = new Player("O");
+        Player playerOne = new Player("X", "1");
+        Player playerTwo = new Player("O", "2");
 
         UserInputStream userInputStream = new UserInputStream(new BufferedReader(new InputStreamReader(System.in)));
         View view = new View(out, board);

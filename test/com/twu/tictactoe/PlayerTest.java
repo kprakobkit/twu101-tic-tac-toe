@@ -12,7 +12,8 @@ public class PlayerTest {
     @Test
     public void shouldGetMark() {
         String mark = "X";
-        Player player = new Player(mark);
+        String name = "1";
+        Player player = new Player(mark, name);
 
         assertEquals("X", player.getMark());
     }

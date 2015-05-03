@@ -26,4 +26,8 @@ public class View {
         printStream.println(board);
         printStream.println("Please enter a cell number between 1 - 9");
     }
+
+    public void printWinner(String name) {
+        printStream.println("Player " + name + " wins!");
+    }
 }

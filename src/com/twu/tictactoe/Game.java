@@ -33,6 +33,12 @@ public class Game {
             Integer validCell = validateCell(userInputStream.askForCell());
 
             board.updateCell(currentPlayer.getMark(), validCell);
+
+            if(board.hasWinningCombination()) {
+                view.printWinner(currentPlayer.getName());
+                break;
+            }
+
             view.printBoardWithInstructions();
 
             switchCurrentPlayer();
