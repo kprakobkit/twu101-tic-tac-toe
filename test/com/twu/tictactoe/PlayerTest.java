@@ -31,7 +31,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void shouldUpdateTheBoard() {
+    public void shouldUpdateTheBoardAfterUserInput() {
         when(userInputStream.getInput()).thenReturn("1");
         when(board.isAValidCell(1)).thenReturn(true);
 
